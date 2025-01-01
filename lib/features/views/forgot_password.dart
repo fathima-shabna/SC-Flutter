@@ -3,14 +3,14 @@ import 'package:flutter_swipe_button/flutter_swipe_button.dart';
 import 'package:service_provider/common/app_colors.dart';
 import 'package:service_provider/common/theme.dart';
 
-class Forgot_password extends StatelessWidget {
-  Forgot_password({super.key});
+class ForgotPassword extends StatelessWidget {
+  ForgotPassword({super.key});
 
   AppColors appColors = AppColors();
   final _formkey = GlobalKey<FormState>();
 
-  TextEditingController _emailController = TextEditingController();
-  TextEditingController _phoneController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _phoneController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -39,55 +39,59 @@ class Forgot_password extends StatelessWidget {
       ),
       body: Form(
         key: _formkey,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            SizedBox(height: MediaQuery.of(context).size.height*0.2,),
-            Center(
-              child: Container(
-                  height: 44,
-                  width: 340,
-                  decoration: BoxDecoration(
-                      border: Border.all(color: Colors.transparent)),
-                  child: Text(
-                    "Enter your registered email or phone number to receive a OTP to reset your password",
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                        height: 1.25,
-                        fontSize: 14,
-                        fontWeight: FontWeight.w700,
-                        color: appColors.appGreyColor),
-                  )),
-            ),
-            SizedBox(
-              height: 50,
-            ),
-            customTextField(
-                imagePath: 'assets/images/email_icon.png',
-                labelText: "Email",
-                controller: _emailController),
-            SizedBox(
-              height: 18,
-            ),
-            customTextField(
-                imagePath: 'assets/images/phone_logo.png',
-                labelText: "Phone Number",
-                controller: _phoneController),
-                SizedBox(
-              height: 50,
-            ),
-            Padding(
-              padding: const EdgeInsets.only(left: 34.0, right: 34.0),
-              child: SwipeButton(
-                thumbPadding: EdgeInsets.all(7),
-                height: 55,
-                activeThumbColor: appColors.appWhiteColor,
-                activeTrackColor: appColors.appBarColor,
-                duration: Duration(seconds: 1),
-                child: Text("Continue",style: TextStyle(color: appColors.appWhiteColor,fontWeight: FontWeight.w700,fontSize: 16),)),
-            )
-          ],
+        child: SingleChildScrollView(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              SizedBox(height: MediaQuery.of(context).size.height*0.3,),
+              Center(
+                child: Container(
+                    height: 44,
+                    width: 340,
+                    decoration: BoxDecoration(
+                        border: Border.all(color: Colors.transparent)),
+                    child: Text(
+                      "Enter your registered email or phone number to receive a OTP to reset your password",
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                          height: 1.25,
+                          fontSize: 14,
+                          fontWeight: FontWeight.w700,
+                          color: appColors.appGreyColor),
+                    )),
+              ),
+              SizedBox(
+                height: 50,
+              ),
+              customTextField(
+                  imagePath: 'assets/images/email_icon.png',
+                  labelText: "Email",
+                  keyboardType: TextInputType.emailAddress,
+                  controller: _emailController),
+              SizedBox(
+                height: 18,
+              ),
+              customTextField(
+                  imagePath: 'assets/images/phone_logo.png',
+                  labelText: "Phone Number",
+                  keyboardType: TextInputType.phone,
+                  controller: _phoneController),
+                  SizedBox(
+                height: 50,
+              ),
+              Padding(
+                padding: const EdgeInsets.only(left: 34.0, right: 34.0),
+                child: SwipeButton(
+                  thumbPadding: EdgeInsets.all(7),
+                  height: 55,
+                  activeThumbColor: appColors.appWhiteColor,
+                  activeTrackColor: appColors.appBarColor,
+                  duration: Duration(seconds: 1),
+                  child: Text("Continue",style: TextStyle(color: appColors.appWhiteColor,fontWeight: FontWeight.w700,fontSize: 16),)),
+              )
+            ],
+          ),
         ),
       ),
     );
@@ -98,6 +102,7 @@ Widget customTextField({
   required String imagePath,
   required String labelText,
   required TextEditingController controller,
+  required TextInputType keyboardType,
   String Function(String?)? validator,
 }) {
   return Padding(
@@ -105,6 +110,7 @@ Widget customTextField({
     child: TextFormField(
       controller: controller,
       validator: validator,
+      keyboardType: keyboardType,
       decoration: InputDecoration(
         prefixIconConstraints: BoxConstraints(minWidth: 25, minHeight: 25),
         contentPadding: EdgeInsets.all(20.0),
