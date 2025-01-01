@@ -17,7 +17,6 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'MC provider',
       theme:darkTheme,
-      
       home: ForgotPassword(),
     );
   }
